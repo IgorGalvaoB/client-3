@@ -1,0 +1,10 @@
+.error-message{
+    color: rgb(255, 145, 145);
+    font-size: 9px;  
+    margin-bottom:-14px;
+}
+
+
+.container-field{
+    padding-bottom:25px;
+}

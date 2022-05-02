@@ -1,48 +1,68 @@
-import React from 'react';
-import { Formik, Form } from 'formik';
-import { TextField } from './TextField';
+import { Field,Formik, Form } from 'formik';
+import { TextField } from '../TextField/TextField.js';
+import './LoginForm.css';
 import * as Yup from 'yup';
+import "bootstrap/dist/css/bootstrap.css";
+import { LoginRequest } from '../../utils/api.utils.js';
 
-export const LoginForm = () => {
+
+export const LoginForm = ({setForm}) => {
     const validate = Yup.object({
         email: Yup.string()
-            .email('Email is invalid')
-            .required('Email is required'),
+
+            .matches(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, 'Email inválido')
+            .email()
+            .required('Email em branco'),
+
         password: Yup.string()
-            .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,16}$/, 'Password must be 6-16 characters, at least one uppercase letter, one lowercase letter, one number and one special character')
-            .min(6, 'Password must be at least 6 charaters')
-            .required('Password is required'),
+
+            .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,16}$/, 'Senha deve conter no mínimo 6 caracteres, uma letra maiscula, um número e um caractere especial')
+            .min(6, 'Senha deve conter no mínimo 6 caracteres')
+            .required('Senha em branco'),
+
     })
+
     return (
+
         <Formik
+
             initialValues={{
-                firstName: '',
-                lastName: '',
                 email: '',
                 password: '',
-                confirmPassword: ''
+                remember:false,
             }}
+
             validationSchema={validate}
-            onSubmit={values => {
-                console.log(values)
+
+            onSubmit={async (values) => {
+                const {data} = await LoginRequest(values);
+                const {username,token} = data;
+                values.remember===true?localStorage.setItem('token',token):sessionStorage.setItem('token',token);
+
             }}
         >
             {props => (
-                <div style={{
-                    position: "absolute",
-                    left: "50%",
-                    top: "50%",
-                    "-webkit-transform": "translate(-50%, -50%)",
-                    transform: "translate(-50%, -50%)"
-                }}>
-                    <h1 className="my-4 font-weight-bold .display-4">Sign Up</h1>
+
+                <div className='login-form'>
+
+                    <h4 className='title'>Entrar no Ibook</h4>
+
                     <Form>
 
-                        <TextField label="Email" name="email" type="email" />
-                        <TextField label="Password" name="password" type="password" />
+                        <TextField label="Email" name="email" type="email" placeholder='Email'/>
+                        <TextField label="Password" name="password" type="password" placeholder="Senha"/>
+                        <Field type="checkbox" name="remember" id="remember" className="form-check-input shadow-none" />
 
-                        <button className="btn btn-dark mt-3" type="submit">Login</button>
-                        <button className="btn btn-danger mt-3 ml-3" type="reset">Cadastre-se</button>
+                        <label htmlFor="remember" className="form-check-label">Permanecer conectado</label>
+
+                        <div className='div-button'>
+                            <button className="btn btn-dark mt-2 mb-3" type="submit">Entrar</button>
+                        </div>
+
+                        <div className='div-button'>
+                            <button className="btn btn-light mt-3 mb-3" onClick={()=>setForm('signup')}type="reset">Criar conta</button>
+                        </div>
+
                     </Form>
                 </div>
             )}
