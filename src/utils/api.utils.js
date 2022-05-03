@@ -1,10 +1,31 @@
 import Axios from 'axios';
-import{useState, useEffect} from 'react';
 
+const axios = Axios.create({
+    baseURL: 'http://localhost:5000/',
+});
 
+export const LoginRequest= async(props)=>{
+    
+    try {
 
-export const LoginRequest = async ({...props})=>{
-    console.log(props)
-    const response = await Axios.post('http://localhost:5000/auth/login',props);
-    return response;
+        const {data} = await axios.post('auth/login',props)
+        
+        return data
+        
+    } catch (error) {
+        
+        return error.response.data
+
+    }
+}
+
+export const NewAccountRequest = async (props)=>{
+        
+        try {
+            const{ data } = await axios.post('auth/signup',props)
+            return data
+        } catch (error) {
+            return error.response.data
+        }
+        
 }

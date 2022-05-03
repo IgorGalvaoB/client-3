@@ -10,8 +10,9 @@ export const TextField = ({ label,signup, ...props }) => {
       {signup&& <label htmlFor={props.id || props.name}>{label}</label> }
       <input
         className={`form-control shadow-none  ${meta.touched && meta.error && 'is-invalid'} `}
-        {...field}  {...props}
-        autoComplete="off" 
+        {...field}  {...props} 
+        autoComplete='off'
+        style={{backgroundColor:"rgb(78,79,80)"}}
       />
       <ErrorMessage component="p" name={field.name} className='error-message'/>
     </div>

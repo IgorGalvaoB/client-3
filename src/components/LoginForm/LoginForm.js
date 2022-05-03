@@ -2,23 +2,24 @@ import { Field,Formik, Form } from 'formik';
 import { TextField } from '../TextField/TextField.js';
 import './LoginForm.css';
 import * as Yup from 'yup';
-import "bootstrap/dist/css/bootstrap.css";
 import { LoginRequest } from '../../utils/api.utils.js';
+import { useState } from 'react';
 
 
 export const LoginForm = ({setForm}) => {
+    const [error,setError] =  useState('');
     const validate = Yup.object({
         email: Yup.string()
 
             .matches(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/, 'Email inválido')
             .email()
-            .required('Email em branco'),
+            .required('Preenchimento obrigatório'),
 
         password: Yup.string()
 
             .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,16}$/, 'Senha deve conter no mínimo 6 caracteres, uma letra maiscula, um número e um caractere especial')
             .min(6, 'Senha deve conter no mínimo 6 caracteres')
-            .required('Senha em branco'),
+            .required('Preenchimento obrigatório'),
 
     })
 
@@ -35,10 +36,10 @@ export const LoginForm = ({setForm}) => {
             validationSchema={validate}
 
             onSubmit={async (values) => {
-                const {data} = await LoginRequest(values);
-                const {username,token} = data;
-                values.remember===true?localStorage.setItem('token',token):sessionStorage.setItem('token',token);
-
+                const data = await LoginRequest(values);
+                if(!data.error)values.remember===true?localStorage.setItem('token',data.token):sessionStorage.setItem('token',data.token);
+                if(data.error === "Email or password is incorrect")setError("Email ou senha incorretos");
+                else setError(data.error);
             }}
         >
             {props => (
@@ -46,9 +47,9 @@ export const LoginForm = ({setForm}) => {
                 <div className='login-form'>
 
                     <h4 className='title'>Entrar no Ibook</h4>
-
+                    <h6>{error}</h6>
                     <Form>
-
+        
                         <TextField label="Email" name="email" type="email" placeholder='Email'/>
                         <TextField label="Password" name="password" type="password" placeholder="Senha"/>
                         <Field type="checkbox" name="remember" id="remember" className="form-check-input shadow-none" />
