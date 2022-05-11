@@ -4,7 +4,7 @@ import axios from 'axios'
 class ApiHandler {
     constructor() {
         this.api = axios.create({
-            baseURL: `http://localhost:5000/`,
+            baseURL: `https://api-3-ibook.herokuapp.com/`,
         })
 
         this.api.interceptors.request.use(
