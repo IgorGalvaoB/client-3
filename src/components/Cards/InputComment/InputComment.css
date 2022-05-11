@@ -1,0 +1,21 @@
+.text-area {
+    width: 380px;
+    display:block;
+    margin: auto;
+    background-color: rgb(77, 78, 79);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    color: rgb(227, 230, 235);
+    padding: 0px 20px 0px 20px;
+    min-height: 30px;
+    line-height: 20px;
+    resize: none;
+    
+
+}
+.btn-send-comment{
+    display:none;
+}
+

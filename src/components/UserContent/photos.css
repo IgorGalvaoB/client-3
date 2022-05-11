@@ -1,0 +1,10 @@
+.ct-photos{
+    background-color: rgb(58,59,60);
+    width: 900px;
+    margin: auto;
+    border-radius: 5px;
+    display:flex;
+    flex-wrap: wrap;
+    padding: 3px;
+
+}

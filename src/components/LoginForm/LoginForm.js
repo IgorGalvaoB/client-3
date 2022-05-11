@@ -2,11 +2,11 @@ import { Field,Formik, Form } from 'formik';
 import { TextField } from '../TextField/TextField.js';
 import './LoginForm.css';
 import * as Yup from 'yup';
-import { LoginRequest } from '../../utils/api.utils.js';
-import { useState } from 'react';
-
-
+import { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ApiHandler from '../../utils/api.utils.js';
 export const LoginForm = ({setForm}) => {
+    const navigate = useNavigate();
     const [error,setError] =  useState('');
     const validate = Yup.object({
         email: Yup.string()
@@ -17,12 +17,19 @@ export const LoginForm = ({setForm}) => {
 
         password: Yup.string()
 
-            .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,16}$/, 'Senha deve conter no mínimo 6 caracteres, uma letra maiscula, um número e um caractere especial')
+            //.matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{6,16}$/, 'Senha deve conter no mínimo 6 caracteres, uma letra maiscula, um número e um caractere especial')
             .min(6, 'Senha deve conter no mínimo 6 caracteres')
             .required('Preenchimento obrigatório'),
 
     })
+    useEffect(() => {
+        const user = localStorage.getItem('user')||sessionStorage.getItem('user');
+        const username = localStorage.getItem('username')||sessionStorage.getItem('username');
+        if(user){
+            navigate(`/${username}`);
+        }
 
+    }, []);
     return (
 
         <Formik
@@ -36,8 +43,20 @@ export const LoginForm = ({setForm}) => {
             validationSchema={validate}
 
             onSubmit={async (values) => {
-                const data = await LoginRequest(values);
-                if(!data.error)values.remember===true?localStorage.setItem('token',data.token):sessionStorage.setItem('token',data.token);
+                const data = await ApiHandler.LoginRequest(values);
+                if(!data.error){
+                    if(values.remember===true){
+                        localStorage.setItem('token',data.token)
+                        localStorage.setItem('user',JSON.stringify(data.user).slice(1,-1));
+                        localStorage.setItem('username',data.username);
+                        navigate(`/${data.username}`);
+                    } else{
+                        sessionStorage.setItem('token',data.token)
+                        sessionStorage.setItem('user',JSON.stringify(data.user).slice(1,-1));
+                        sessionStorage.setItem('username',data.username);
+                        navigate(`/${data.username}`);
+                    }
+                };
                 if(data.error === "Email or password is incorrect")setError("Email ou senha incorretos");
                 else setError(data.error);
             }}

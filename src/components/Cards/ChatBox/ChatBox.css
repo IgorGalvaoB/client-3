@@ -1,0 +1,48 @@
+.chat-box img{
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin:auto auto auto 7px;
+}
+
+.chat-box{
+    width:360px;
+    height:70px;
+    border-radius: 10px;
+    background-color: rgb(36,37,38);
+    display:flex;
+    flex-direction: row;
+    margin: 0 auto 0 auto;
+   
+}
+
+.chat-box-content h6{
+    width: 280px;
+    margin:13px auto 5px auto;
+    color:rgb(227,230,235);
+    font-weight: 6  00;
+    font-size: 15px;
+}
+.chat-box-content p{
+    font-size: 13px;
+    color:rgb(227,230,235);
+    margin:0 auto 0 5px;
+    padding:0;
+}
+.chat-box-content{
+    width: 290px;
+    margin:auto;
+    height: 70px;
+}
+
+.chat-box:hover{
+    background-color: rgb(58,59,60);
+    
+}
+.chat-box:active{
+    background-color: rgb(58,59,60);
+}
+.chat-box::after{
+    background-color: rgb(58,59,60);
+}

@@ -1,0 +1,100 @@
+.container-profile {
+    width: 950px;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 50px;
+    background-color: rgb(36,37,38);
+}
+
+.cover-image {
+    width: 950px;
+    height: 350px;
+    position: relative;
+    top: 0;
+    left: 0;
+   
+    
+}
+
+.profile-image {
+    position: absolute;
+    width:220px;
+    height:220px;
+    border-radius: 50%;
+    top: 240px;
+    left: 50px;
+    border: 8px solid rgb(36,37,38);
+    object-fit: cover;
+}
+
+.profile-images {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+.container-info{
+    display:flex;
+    flex-direction: row;
+    
+    height: 110px;
+    color:white;
+   
+}
+.info{
+    max-width: 30px;
+    height:100%;
+    min-width: 350px;
+    margin-top:20px;
+    margin-left:280px;
+
+
+}
+.menu{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px ridge rgb(227,230,235);
+    padding: 20px 40px 20px 40px;
+    width: 80%;
+    margin: 20px auto;
+}
+.bt-menu{
+    height: 60px;
+    width: 120px;
+    background-color: rgb(36,37,38);
+    border:none;
+    border-radius: 5px;
+    color:rgb(185,187,191);
+    font-size: 18px;
+    font-weight: bold;
+}
+.bt-menu:hover{
+    background-color: rgb(58,59,60);
+}
+.btn-change-profile{
+    position: absolute;
+    top: 410px;
+    left: 20px;
+    margin-top:60px;
+    margin-left:30px;
+    height: 30px;
+    width: 30px;
+    background-color:rgb(36,37,38);
+    border-radius: 50%;
+}
+.btn-status-buttons{
+    background-color: rgb(96, 110, 125);
+    border-radius: 5px;
+    border:none;
+    height: 35px;
+    width: 250px;
+    margin:10px auto ;
+    color:rgb(227, 235, 234);  
+}
+.btn-status-buttons:hover{
+    background-color: rgb(185,187,191);
+    color:rgb(36,37,38);
+}
+.ct-content{
+    min-height: 31.3vh;
+}
