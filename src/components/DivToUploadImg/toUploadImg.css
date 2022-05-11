@@ -1,0 +1,39 @@
+.container-div{
+    width: 400px;
+    z-index: 1;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: rgb(58,59,60);
+    width: 600px;
+    border-radius: 20px;
+}
+.container-div p{
+    position: absolute;
+    display: block;
+    right:15px;
+    top:2px;
+    cursor: pointer;
+    margin-left:0px;
+    font-size: 30px;
+    color:rgb(227,230,235);
+
+}
+.btn-load{
+    width:100px;
+    background-color: rgb(58,59,60);
+    border-radius: 20px;
+    border:none;
+    height: 40px;
+    width: 100px;
+    margin: 10px auto;
+    color:rgb(227,230,235);  
+    font-weight: bold;
+    
+}
+.btn-load:hover{
+    background-color: rgb(185,187,191);
+    color:rgb(58,59,60);
+}

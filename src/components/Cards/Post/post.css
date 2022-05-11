@@ -1,0 +1,32 @@
+.post{
+    width:430px;
+    background-color:rgb(58,59,60);
+    border-radius: 10px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    position:relative;
+
+}
+.post p{
+    width: 380px;
+    margin: auto auto 20px auto;
+    color: rgb(227, 230, 235);
+}
+.img-post{
+    width: 380px;
+    height: auto;
+    display:block;
+    
+}
+.delete-post{
+    display: block;
+    width: 20px;
+    font-size:20px;
+    position:absolute;
+    left:410px;
+    top:0;
+}
+.delete-post:hover{
+    cursor: pointer;
+}

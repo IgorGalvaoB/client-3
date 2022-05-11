@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import { TextField } from '../TextField/TextField.js';
 import './SignupForm.css';
 import * as Yup from 'yup';
-import { NewAccountRequest } from '../../utils/api.utils.js';
+import  ApiHandler  from '../../utils/api.utils.js';
 import { useState } from 'react';
 
 export const SignupForm = ({ setForm }) => {
@@ -51,7 +51,7 @@ export const SignupForm = ({ setForm }) => {
         if (values.lastName) {
           name = `${values.firstName} ${values.lastName}`;
         }
-        const data = await NewAccountRequest({ name: name, email: values.email, password: values.password, username: values.username });
+        const data = await ApiHandler.NewAccountRequest({ name: name, email: values.email, password: values.password, username: values.username });
 
         if (data.error === "Username already exist") setError("Nome de usuário já existe");
 
@@ -84,4 +84,4 @@ export const SignupForm = ({ setForm }) => {
       )}
     </Formik>
   )
-}
+} 

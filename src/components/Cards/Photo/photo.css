@@ -1,0 +1,6 @@
+.img-photo{
+    display:block;
+    object-fit: cover;
+    margin: auto;
+    margin-bottom: 5px;
+}
